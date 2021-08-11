@@ -2,11 +2,25 @@
  Each GCP resource (compute engine, Stackdriver monitoring, Cloud SQL, etc) is attached to a single GCP project which may or may not be arranged within folders representing the departments in an organisation:  
  
 <div align="center">
- <p>resource <- project <- folder <- organisation(/Individual user)</p>
+ <p>organisation(/Individual user)</p>
+ <img src="https://render.githubusercontent.com/render/math?math=\uparrow">
+ <p>folder</p>
+ <img src="https://render.githubusercontent.com/render/math?math=\uparrow"> 
+ <p>project</p>
+ <img src="https://render.githubusercontent.com/render/math?math=\uparrow">
+ <p>resource</p>
 </div>
  
-   eg: Compute engine <- GMail <- Workspace <- Google  
-
+   **example**: 
+<div align="center">
+ <p>Google</p>
+ <img src="https://render.githubusercontent.com/render/math?math=\uparrow">
+ <p>Workspace</p>
+ <img src="https://render.githubusercontent.com/render/math?math=\uparrow"> 
+ <p>GMail</p>
+ <img src="https://render.githubusercontent.com/render/math?math=\uparrow">
+ <p>Compute engine</p>
+</div>
 
 # Identify and Access Management 
  Control access to resource following the principal of least privilages while assigning resources to roles.  
@@ -19,7 +33,22 @@
  **Logging**: allows to store search and set alerts for log data within GCP,  
  **Monitoring**: provides visibility into the performance, uptime and overall health of cloud applications, by collecting metrics events and metadata from GCP.  
 
-# Compute options 
+# Compute options  
+  
+  Compute enginer:   
+   * For creating monolithic applications   
+   * Already managing VMs in on-premise environment or other cloud platform, and to obtain similar performance.  
+  
+  Kubernetes engine:   
+   * if application is containerized, and  
+   * micro-service based   
+  
+  App-engine:  
+   * Lets user concentrate only on the application development and code, without having to configure any aspect of the infrastructure.  
+  
+  Cloud functions:  
+   * To write simple single purpose functions attached to events empted from cloud services.  
+  
 ## Google compute engine 
   * Is used for provisioning and managing cloud VM instances.  
   * **Load balancing** and **autoscaling** can be implemented when provisioning multiple VM instances  
@@ -39,6 +68,43 @@
   * Custom images (With OS patches and softwares pre-installed) can be created from an instance, persistant disk, snapshot, another image, or file in cloud storage. That can be shared accross projects. An image can be **hardened** with specific corporate security standards and distributed for efficient and smooth workspace setup. Custom images are preferred over startup scripts since they do not have bootup overhead. Although custom images facilitate installation of OS patches and softwares, creation and manipulation of files and/or services need to be done using startup scripts while creating an instance or an instance template using the custom image.   
   * **Live migration**: To keep VM instances running when a host system needs to be updated the VM instances are migrated to another host within the same zone (Not supported by GPUs and preemptible VMs). and this can be configured using **Availability policies**. The two available important policies include *On host maintainance* (default: migrate, other options: terminate, and *automatic restart* to automatically restart VM instances that terminated due to non-user-initiated reasons (maintenance event, hardware failure, etc).  
 
+## Unmanaged instance groups 
+  They are used when we would like to do most of the management ourselves, though they aren't really recommended and are designed for heterogenous clusters,  
+  eg: migrating a particular cluster that is on premise and you'd like it to run exactly as it is on google cloud.  
+  
+## pre-emptible machines   
+  They cost 70% less than regularly charged VM, no control over the shut down of VM - can be shut down by GCP at any time (preempted) within 24hrs (with 30s warning).
+  Cannot alter number of available VMs.  
+  
+  Used for:  
+   * Fault tolerant application  
+   * cost sensitive scenario  
+   * When workload is not immediate such as non-immediate batch-processing jobs  
+  
+  Restrictions:    
+   * Not always available   
+   * No SLAs   
+   * Can't be converted to regular VMs   
+   * No automatic restarts   
+   * Free tier credits are not applicable to launch these.   
+
+## Cloud run 
+  It runs containers not VMs, supports autoscaling but requires restructuring application as docker image to implement it.  
+
+# Networking   
+  4 categories of networking components available:  
+   * Connect:   
+     * **Cloud VPN** and **Cloud Interconnect** help connect on-premise resources to GCP and establish a secure channel between them.    
+     * **Cloud VPC**: Virtualized network subnets   
+   * Scale:   
+     * **Cloud Load balancing** scaling of backend instances based on incoming  traffic  
+     * **Cloud CDN** allows caching objects closest to the user accessing it to reduce latency.  
+   * Optimize:  
+     * **Standard Network Tier**(Optimize for cost) and **Premium Network Tier**(Optimize for performance) variants available.  
+   * Secure:  
+     * **Identity Aware Proxy** and **Cloud Armour** allows to secure applications on the internet to prevent unauthorized (malicious) activities.   
+  
+  
 # Billing 
  * Pricing calculator available to plan and estimate GCP products usage.  
  * Users/Organisations are billed by the second after a minimum period of 1 minute.   
@@ -51,30 +117,5 @@
   * Does not apply to A2 and E2 machine types as well as instances created using app-engine flexible and dataflow resources.  
   * **Commited usage discounts** require user/organisation commitment based on predictable resource requirements from a certain period of time (1-3 years), and the discount upto 70% can be obtained based on machine type and GPU. Same restrictions as those for sustained usage discount apply.    
  
-
-## Unmanaged instance groups 
-  They are used when we would like to do most of the management ourselves, though they aren't really recommended and are designed for heterogenous clusters,  
-  eg: migrating a particular cluster that is on premise and you'd like it to run exactly as it is on google cloud.  
-  
-## pre-emptible machines 
-  They cost 70% less than regularly charged VM, no control over the shut down of VM - can be shut down by GCP at any time (preempted) within 24hrs (with 30s warning).
-  Cannot alter number of available VMs.  
-  
-  Used for:
-    * Fault tolerant application  
-    * cost sensitive scenario  
-    * When workload is not immediate such as non-immediate batch-processing jobs  
-  Restrictions:  
-    * Not always available  
-    * No SLAs  
-    * Can't be converted to regular VMs  
-    * No automatic restarts  
-    * Free tier credits are not applicable to launch these.  
-
-
-  
-
-## Cloud run 
-  It runs containers not VMs, supports autoscaling but requires restructuring application as docker image to implement it.  
   
   
