@@ -22,16 +22,16 @@
  <p>Compute engine</p>
 </div>
 
-# Identify and Access Management 
+# Identify and Access Management   
  Control access to resource following the principal of least privilages while assigning resources to roles.  
  
 <div align="center">
- <p>resource <-> access_type <-> user/identity</p>
+ <p>resource <img src="https://render.githubusercontent.com/render/math?math=\leftrightarrow"> access_type <img src="https://render.githubusercontent.com/render/math?math=\leftrightarrow"> user/identity</p>
 </div>
 
-# Stackdriver workspace
+# Stackdriver workspace (Cloud monitoring/Debugging)  
  **Logging**: allows to store search and set alerts for log data within GCP,  
- **Monitoring**: provides visibility into the performance, uptime and overall health of cloud applications, by collecting metrics events and metadata from GCP.  
+ **Monitoring**: provides visibility into the performance, uptime and overall health of cloud applications, by collecting metrics events and metadata from GCP.   
 
 # Compute options  
   
@@ -68,11 +68,11 @@
   * Custom images (With OS patches and softwares pre-installed) can be created from an instance, persistant disk, snapshot, another image, or file in cloud storage. That can be shared accross projects. An image can be **hardened** with specific corporate security standards and distributed for efficient and smooth workspace setup. Custom images are preferred over startup scripts since they do not have bootup overhead. Although custom images facilitate installation of OS patches and softwares, creation and manipulation of files and/or services need to be done using startup scripts while creating an instance or an instance template using the custom image.   
   * **Live migration**: To keep VM instances running when a host system needs to be updated the VM instances are migrated to another host within the same zone (Not supported by GPUs and preemptible VMs). and this can be configured using **Availability policies**. The two available important policies include *On host maintainance* (default: migrate, other options: terminate, and *automatic restart* to automatically restart VM instances that terminated due to non-user-initiated reasons (maintenance event, hardware failure, etc).  
 
-## Unmanaged instance groups 
+### Unmanaged instance groups 
   They are used when we would like to do most of the management ourselves, though they aren't really recommended and are designed for heterogenous clusters,  
   eg: migrating a particular cluster that is on premise and you'd like it to run exactly as it is on google cloud.  
   
-## pre-emptible machines   
+### pre-emptible machines   
   They cost 70% less than regularly charged VM, no control over the shut down of VM - can be shut down by GCP at any time (preempted) within 24hrs (with 30s warning).
   Cannot alter number of available VMs.  
   
@@ -88,9 +88,21 @@
    * No automatic restarts   
    * Free tier credits are not applicable to launch these.   
 
-## Cloud run 
+### Cloud run 
   It runs containers not VMs, supports autoscaling but requires restructuring application as docker image to implement it.  
+  It is a managed service for running containers, and they must be stateless (can't have persistant disk attached).  
 
+## App engine  
+ * Standard:  
+    Language specific sandbox based service   
+ * Flexible:  
+    Can specify custom docker image to run in appengine.  
+
+# Cloud pub/sub 
+  Allows to decouple services, say frontend and backend in instances where you need to scale your application the frontend scales far more efficiently (owing to their stateless nature) compared to the backend (cloud SQL database service), therefore it becomes necessary to make the frontend instead communicate to a cloud pub/sub topic where tasks can be queued up and allowing the backend services to consume these tasks at whatever rate that it can without lose of data.  
+  
+  Important from a scalability perspective.  
+  
 # Networking   
   4 categories of networking components available:  
    * Connect:   
