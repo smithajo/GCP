@@ -1,6 +1,7 @@
 # GCP
 Resources and links for Google Cloud Associate Engineering exam
-
+  
+  GCP Flowchart: https://grumpygrace.dev/posts/gcp-flowcharts/
 
 ## Links to resources for Preparing for the Associate Cloud Engineer Exam, Module 1
 Links to resources mentioned in this module
