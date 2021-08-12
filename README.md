@@ -98,6 +98,11 @@
  * Flexible:  
     Can specify custom docker image to run in appengine.  
 
+## Anthos
+  
+  Hybrid cloud service used to manage Kubernetes clusters in any cloud platform from one location, easy and efficient management of workload.
+
+
 # Cloud pub/sub 
   Allows to decouple services, say frontend and backend in instances where you need to scale your application the frontend scales far more efficiently (owing to their stateless nature) compared to the backend (cloud SQL database service), therefore it becomes necessary to make the frontend instead communicate to a cloud pub/sub topic where tasks can be queued up and allowing the backend services to consume these tasks at whatever rate that it can without lose of data.  
   
@@ -134,8 +139,24 @@
      * **Standard Network Tier**(Optimize for cost) and **Premium Network Tier**(Optimize for performance) variants available.  
    * Secure:  
      * **Identity Aware Proxy** and **Cloud Armour** allows to secure applications on the internet to prevent unauthorized (malicious) activities.   
+
+# Storage  
+## Big Query:  
+  uses columnar storage  
+
+## Datastore/firestore:  
+  * document based  
+  * json formatted  
+  * Flexible schema  
   
-  
+## Bigtable:  
+  * organizing principle -> sparse multidimensional map  
+  * Cluster of VMs that manage metadata about the data. The data is stored in the colossus filesystem. The way the keys are structured determines which block the data is going to be written to. If all the keys are sequential then we get a hotspot were data is written to the same block.  
+
+## Cloud Storage
+  * Migrating from on-premise legacy hadoop cluster using HDFS (hadoop filesystem), to use this in gcloud we can map HDFS to (through dataproc) cloud storage.  
+
+
 # Billing 
  * Pricing calculator available to plan and estimate GCP products usage.  
  * Users/Organisations are billed by the second after a minimum period of 1 minute.   
