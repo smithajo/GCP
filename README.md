@@ -98,8 +98,10 @@
  * Flexible:  
     Can specify custom docker image to run in appengine.  
 
+## Kubernetes engine
+  Commands that start with `gloud cluster` are used to manipulate the cluster themselves, whereas `kubectl` commands are used to manipulate things inside the cluster such as the node-pools, pods etc.   
+
 ## Anthos
-  
   Hybrid cloud service used to manage Kubernetes clusters in any cloud platform from one location, easy and efficient management of workload.
 
 
@@ -154,8 +156,10 @@
   * Cluster of VMs that manage metadata about the data. The data is stored in the colossus filesystem. The way the keys are structured determines which block the data is going to be written to. If all the keys are sequential then we get a hotspot were data is written to the same block.  
 
 ## Cloud Storage
+  * Allows setting policies to cloud storage buckets, to automatically delete/create files, to move file to nearline/coldline storage after certain period of time.
   * Migrating from on-premise legacy hadoop cluster using HDFS (hadoop filesystem), to use this in gcloud we can map HDFS to (through dataproc) cloud storage.  
-
+  * Multi-region cloud storage buckets replicate the data redundantly across several regions for it to be accessible to users with low latency and high availability.   
+  * 
 
 # Billing 
  * Pricing calculator available to plan and estimate GCP products usage.  
