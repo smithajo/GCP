@@ -103,6 +103,25 @@
   
   Important from a scalability perspective.  
   
+  Note: The maximum permissible size of data is 10MB, larger data that needs ETL processing of larger data cloud storage can be used where data is stored in a bucket. Cloud pub/sub can be used in this case to send url that points to bucket and file for the next service/process to use.  
+
+# Managed services 
+## Cloud Dataproc
+  * Managed hadoop and spark service  
+  * Big data processing  
+  * To migrate from onpremise hadoop cluster  
+  * Preparing data, data processing pipelines.
+
+## Dataflow
+  * Data processing pipelines  
+  * Stream-processing and batch-processing of data  
+
+## Dataprep
+  * Preparing data for machine learning
+
+## Datalab
+  * Interactive tool for exploring data 
+
 # Networking   
   4 categories of networking components available:  
    * Connect:   
