@@ -34,6 +34,8 @@
  <img src="https://render.githubusercontent.com/render/math?math=\uparrow">
  <p>Compute engine</p>
 </div>
+  
+  Using folders requires there to be an organization node to be present at the top of the hierarchy.  
 
 # Identify and Access Management   
  Control access to resource following the principal of least privilages while assigning resources to roles.  
@@ -41,6 +43,11 @@
 <div align="center">
  <p>resource <img src="https://render.githubusercontent.com/render/math?math=\leftrightarrow"> access_type <img src="https://render.githubusercontent.com/render/math?math=\leftrightarrow"> user/identity</p>
 </div>
+
+ * Custom roles can only be assigned at project or organizational level, and not on folders.   
+ * Can give roles/permissions to resources through service accounts, eg: Giving a VM instance permission to access a cloud storage bucket and not allowing external connection to it.  
+ * Service account is also a resource, it can have IAM policies attached to it. 
+ * 
 
 # Stackdriver workspace (Cloud monitoring/Debugging)  
  **Logging**: allows to store search and set alerts for log data within GCP,  
@@ -166,6 +173,22 @@
    * Secure:  
      * **Identity Aware Proxy** and **Cloud Armour** allows to secure applications on the internet to prevent unauthorized (malicious) activities.   
 
+  Cloud dedicated interconnect conforms to googles SLAs unlike Cloud VPN, directConnect or Carrier connect for securing establishing connection between onpremise and google cloud networks.  
+
+
+## Cloud VPC
+  * They have routing tables for forwarding traffic from one instance to another within the same network even across subnetworks across GCP zones.  
+  * When dealing with several projects and need to establish communication between VPCs
+    * **VPC-peering** is used to allow communication between two VPCs using a peer relation  
+    * **Shared VPC** is used when admin needs to use IAM control over who can access what resource in another VPC  
+  * 
+
+## Firewall 
+  * Firewall can be configured to limit access to resources INGRESS or OUTGRESS.   
+  * Tags can be used to reference firewall rules to instances that have the same tag.  
+  * 
+  
+
 ## Cloud armour
   * Web-application firewall at layer 7(OSI model), rules are associated with application logic layer, to control the incoming data - http traffic and so on.  
   * Protect webapplication against DDOS attacks  
@@ -181,14 +204,27 @@
   * Flexible schema  
   
 ## Bigtable:  
+  * Sparsly populated rows - NoSQL  
+  * Considered as persistant hashtable - Each row in the database can be sparsely populated, and is looked using a single key.   
+  * HBase API 
   * organizing principle -> sparse multidimensional map  
   * Cluster of VMs that manage metadata about the data. The data is stored in the colossus filesystem. The way the keys are structured determines which block the data is going to be written to. If all the keys are sequential then we get a hotspot were data is written to the same block.  
 
 ## Cloud Storage
-  * Allows setting policies to cloud storage buckets, to automatically delete/create files, to move file to nearline/coldline storage after certain period of time.
+  * Specify file using bytes of data and refered using unique key - it's URL easily incorporated into webapplication.  
+  * Fully managed and scalable.  
+  * Storage objects are immutable, can't be edited but new versions are created. Object versioning can be enabled  
+  * Data in transit is encrypted by HTTPs.  
+  * Access Control List (ACL) can be used to define level of access to objects in buckets using *scope* and *permission*.  
+  * Allows setting life cycle management policies to cloud storage buckets, to automatically delete/create files, to move file to nearline/coldline storage after certain period of time.  
+  * Types:  
+     * Multiregional  
+     * Regional  
+     * Nearline (For objects that are accessed once per month on average)  
+     * Coldline (For objects that are accessed once per year on average)  
+  * Coldline and nearline have access cost per gb of data read.  
   * Migrating from on-premise legacy hadoop cluster using HDFS (hadoop filesystem), to use this in gcloud we can map HDFS to (through dataproc) cloud storage.  
   * Multi-region cloud storage buckets replicate the data redundantly across several regions for it to be accessible to users with low latency and high availability.   
-  * 
 
 # Billing 
  * Pricing calculator available to plan and estimate GCP products usage.  
