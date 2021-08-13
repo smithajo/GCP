@@ -45,10 +45,20 @@
   
   App-engine:  
    * Lets user concentrate only on the application development and code, without having to configure any aspect of the infrastructure.  
+   * Appengine-flexible:   
+      * runs on containers  
+       * More feature support for AB testing, rerouting and so on.  
   
   Cloud functions:  
    * To write simple single purpose functions attached to events empted from cloud services.  
+   * Event driven  
+   * Can only write code/funcion in certain set of languages  
+   * Short-run application  
   
+  Cloud run:  
+    * Managed service for stateless containers.  
+    * Minimum management
+    
 ## Google compute engine 
   * Is used for provisioning and managing cloud VM instances.  
   * **Load balancing** and **autoscaling** can be implemented when provisioning multiple VM instances  
@@ -141,6 +151,11 @@
      * **Standard Network Tier**(Optimize for cost) and **Premium Network Tier**(Optimize for performance) variants available.  
    * Secure:  
      * **Identity Aware Proxy** and **Cloud Armour** allows to secure applications on the internet to prevent unauthorized (malicious) activities.   
+
+## Cloud armour
+  * Web-application firewall at layer 7(OSI model), rules are associated with application logic layer, to control the incoming data - http traffic and so on.  
+  * Protect webapplication against DDOS attacks  
+  * Allows us to specify our own package check logic on incoming requests/data 
 
 # Storage  
 ## Big Query:  
