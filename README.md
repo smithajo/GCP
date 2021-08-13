@@ -50,8 +50,13 @@
  * 
 
 # Stackdriver workspace (Cloud monitoring/Debugging)  
- **Logging**: allows to store search and set alerts for log data within GCP,  
- **Monitoring**: provides visibility into the performance, uptime and overall health of cloud applications, by collecting metrics events and metadata from GCP.   
+ * **Logging**: allows to store search and set alerts for log data within GCP,  
+ * **Monitoring**: provides visibility into the performance, uptime and overall health of cloud applications, by collecting metrics events and metadata from GCP.   
+ * Trace
+ * Error reporting
+ * Debugger
+ * Profiler
+ 
 
 # Compute options  
   
@@ -123,35 +128,75 @@
   It is a managed service for running containers, and they must be stateless (can't have persistant disk attached).  
 
 ## App engine  
- * Standard:  
-    Language specific sandbox based service   
- * Flexible:  
-    Can specify custom docker image to run in appengine.  
+ * App Engine offers NoSQL databases, in-memory caching, load balancing, health checks, logging, and user authentication to applications running in it.  
+ * Types:  
+     1. Standard:  
+        * Language specific sandbox based service   
+        * Runs applications in a sandbox, which has restrictions -
+            * no write to local files but can write to database services,
+            * request timeout period 60s,
+            * and limit on 3rd party software   
+        * Supports only fixed set of languages - Go, PHP, Java, Python, Node. js, . NET, and Ruby  
+        * Rapid scaling 
+     2. Flexible:  
+        * Can specify custom docker image to run in compute engine machines.  
+        * No sandbox constraints  
+        * Allows icmp - ssh connection to the VM instance 
+        * Takes longer to startup  
+        * Lets user specify the geographic region the app runs in  
+        * Gradual scaling, with occassional fluctuations in demand.  
 
 ## Kubernetes engine
+  * Kubernetes lets authorized users manage and scale applications through APIs that control clusters   
+  * Each cluster comprises of a master and one or more nodes  
+  * Kubernetes deploys containers inside of abstraction called *pods*  
+  * A pod is the smallest deployable unit in kubernetes.
+  * It generally has just one container, but deeply integrated containers can be put in single pod  
+  * A pod has unique IP address and ports which are ephemeral in nature, the containers inside a port access resources using localhost network interface  
+  * A **deployment** represents a group of replica of the same pod   
+  * To connect publically to outside network, the pods can be exposed using loadbalancer, which creates a service with fixed IP address for pods:
+      * internalLoadbalancer
+      * NodePort
+      * LoadBalancer
+  * 
   Commands that start with `gloud cluster` are used to manipulate the cluster themselves, whereas `kubectl` commands are used to manipulate things inside the cluster such as the node-pools, pods etc.   
   
 
 ## Anthos
-  Hybrid cloud service used to manage Kubernetes clusters in any cloud platform from one location, easy and efficient management of workload.
-
+  * Hybrid cloud service used to manage Kubernetes clusters in any cloud platform from one location, easy and efficient management of workload.  
+  * Allows splitting the application workload between cloud and on-premise high capacity systems tailered to company requirements, when full scale migration on on-prem system to cloud is not required.  
+  * Maintain consistent policies and services accross all clusters regardless of where they are deployed.  
+  * Shared services between the cloud and on-prem GKE deployments include:
+      * Cloud interconnect
+      * GCP Marketplace
+      * Stackdriver
+  * Anthos Configuration managemnet agent use policy repository (hosted either on-prem or on cloud) to enforce policies in each environment, to manage images and deployment configuration.    
 
 # Cloud pub/sub 
-  Allows to decouple services, say frontend and backend in instances where you need to scale your application the frontend scales far more efficiently (owing to their stateless nature) compared to the backend (cloud SQL database service), therefore it becomes necessary to make the frontend instead communicate to a cloud pub/sub topic where tasks can be queued up and allowing the backend services to consume these tasks at whatever rate that it can without lose of data.  
+  Allows to decouple services through asynchronous messaging (Some messages may be delivered more than once), say frontend and backend in instances where you need to scale your application the frontend scales far more efficiently (owing to their stateless nature) compared to the backend (cloud SQL database service), therefore it becomes necessary to make the frontend instead communicate to a cloud pub/sub topic where tasks can be queued up and allowing the backend services to consume these tasks at whatever rate that it can without lose of data.  
   
   Important from a scalability perspective.  
   
   Note: The maximum permissible size of data is 10MB, larger data that needs ETL processing of larger data cloud storage can be used where data is stored in a bucket. Cloud pub/sub can be used in this case to send url that points to bucket and file for the next service/process to use.  
 
+# Deployment manager
+  * Provides repeatable deployment, cloning and scaling of application instances with template files.  
+  * Deployment Manager is an infrastructure management system for GCP resources.
+
+# Cloud source repository 
+  It is used when users don't want to host their own git instance, and they want to integrate their source repositories with IAM permissions.  
+
 # Managed services 
 ## Cloud Dataproc
-  * Managed hadoop and spark service  
+  * Managed hadoop and spark/Hive/Pig service  
   * Big data processing  
+  * Scalable while jobs are running  
   * To migrate from onpremise hadoop cluster  
-  * Preparing data, data processing pipelines.
+  * Preparing data, data processing pipelines.  
+  * Supports SpartSQL and SparkML
 
 ## Dataflow
-  * Data processing pipelines  
+  * Data processing pipelines, realtime data handling    
   * Stream-processing and batch-processing of data  
 
 ## Dataprep
@@ -159,6 +204,9 @@
 
 ## Datalab
   * Interactive tool for exploring data 
+
+## BigQuery
+  Can specify region in which dataset is stored  
 
 # Networking   
   4 categories of networking components available:  
@@ -199,6 +247,10 @@
   uses columnar storage  
 
 ## Datastore/firestore:  
+  * Main usecase is to store structural data from appengine apps  
+  * Transactional SQL-like query
+  * Cloud Datastore databases can span App Engine and Compute Engine applications  
+  * Unit-size: 1MB/entity  
   * document based  
   * json formatted  
   * Flexible schema  
