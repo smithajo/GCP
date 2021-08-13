@@ -123,6 +123,7 @@
 
 ## Kubernetes engine
   Commands that start with `gloud cluster` are used to manipulate the cluster themselves, whereas `kubectl` commands are used to manipulate things inside the cluster such as the node-pools, pods etc.   
+  
 
 ## Anthos
   Hybrid cloud service used to manage Kubernetes clusters in any cloud platform from one location, easy and efficient management of workload.
