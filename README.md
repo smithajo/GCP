@@ -1,3 +1,16 @@
+# Cloud computing 
+  Provides:
+  * On-demand service 
+  * Broad-access network (resources can be accessed from any part of the world using an internet connection)  
+  * Resource pooling (Resources are shared with the customers)  
+  * Rapid elasticity 
+  * Measured service (Pay from what you use)
+
+# Google cloud platform
+  * Availability
+  * Scalability  
+  * Insfrastructure needs (Lets users focus on the development that configuring the infrastructure)
+
 # Resource hierarchy
  Each GCP resource (compute engine, Stackdriver monitoring, Cloud SQL, etc) is attached to a single GCP project which may or may not be arranged within folders representing the departments in an organisation:  
  
