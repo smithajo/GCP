@@ -47,7 +47,6 @@
  * Custom roles can only be assigned at project or organizational level, and not on folders.   
  * Can give roles/permissions to resources through service accounts, eg: Giving a VM instance permission to access a cloud storage bucket and not allowing external connection to it.  
  * Service account is also a resource, it can have IAM policies attached to it. 
- * 
 
 # Stackdriver workspace (Cloud monitoring/Debugging)  
  * **Logging**: allows to store search and set alerts for log data within GCP,  
@@ -75,14 +74,14 @@
        * More feature support for AB testing, rerouting and so on.  
   
   Cloud functions:  
-   * To write simple single purpose functions attached to events empted from cloud services.  
-   * Event driven  
-   * Can only write code/funcion in certain set of languages  
-   * Short-run application  
-  
-  Cloud run:  
-    * Managed service for stateless containers.  
-    * Minimum management
+   * To write simple single purpose functions attached to events empted from cloud services.   
+   * Event driven   
+   * Can only write code/funcion in certain set of languages   
+   * Short-run application   
+
+  Cloud run:   
+   * Managed service for stateless containers.  
+   * Minimum management
     
 ## Google compute engine 
   * Is used for provisioning and managing cloud VM instances.  
@@ -233,9 +232,7 @@
 
 ## Firewall 
   * Firewall can be configured to limit access to resources INGRESS or OUTGRESS.   
-  * Tags can be used to reference firewall rules to instances that have the same tag.  
-  * 
-  
+  * Tags can be used to reference firewall rules to instances that have the same tag.    
 
 ## Cloud armour
   * Web-application firewall at layer 7(OSI model), rules are associated with application logic layer, to control the incoming data - http traffic and so on.  
